@@ -1,0 +1,27 @@
+{
+  "name": "sanity-pills",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/coreyward/sanity-pills",
+  "author": "Corey Ward <corey.atx@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "slugify": "^1.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "prettier": "^2.0.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "resolutions": {
+    "chokidar": "3.3.0"
+  },
+  "scripts": {
+    "build": "webpack --mode=production"
+  }
+}
