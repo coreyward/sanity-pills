@@ -1,6 +1,6 @@
 {
   "name": "sanity-pills",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "index.js",
   "repository": "https://github.com/coreyward/sanity-pills",
   "author": "Corey Ward <corey.atx@gmail.com>",
