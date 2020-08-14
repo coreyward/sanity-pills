@@ -83,6 +83,6 @@ const validateFormat = (slug) => {
       return /\/[a-z]\//.test(slug)
 
     default:
-      return /^\/[a-z][a-z0-9/-]*[a-z0-9]\/$/.test(slug)
+      return /^\/([a-z][a-z0-9/-]*[a-z0-9]|404)\/$/.test(slug)
   }
 }
