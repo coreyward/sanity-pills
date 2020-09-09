@@ -14,19 +14,22 @@ export default imageField
 
 export const createImageField = ({
   validations: { required, ...validations } = {},
+  warnings = {},
   ...overrides
 }) => ({
   ...imageField,
-  validation: Rule =>
+  validation: (Rule) =>
     [
       required && Rule.required(),
       Object.keys(validations).length &&
-        Rule.custom(buildImageValidator(validations)),
-    ].filter(x => x),
+        Rule.custom(buildImageValidator(validations, validators)),
+      Object.keys(warnings).length &&
+        Rule.custom(buildImageValidator(warnings, warningValidators)).warning(),
+    ].filter(Boolean),
   ...overrides,
 })
 
-const buildImageValidator = validations => image => {
+const buildImageValidator = (validations, selectedValidators) => (image) => {
   if (image && image.asset && image.asset._ref) {
     const { dimensions } = decodeAssetId(image.asset._ref)
 
@@ -36,11 +39,11 @@ const buildImageValidator = validations => image => {
     }
 
     for (const validation in validations) {
-      if (!validators.hasOwnProperty(validation)) {
+      if (!selectedValidators.hasOwnProperty(validation)) {
         throw new Error(`Unexpected validation \`${validation}\` specified.`)
       }
 
-      const result = validators[validation](validatorProps)
+      const result = selectedValidators[validation](validatorProps)
       if (typeof result === "string") return result
     }
   }
@@ -58,3 +61,14 @@ const validators = {
   maxHeight: ({ maxHeight, height }) =>
     height <= maxHeight || `Image must be less than ${maxHeight}px tall`,
 }
+
+const warningValidators = Object.entries(validators).reduce(
+  (out, [name, fn]) => {
+    out[name] = (props) =>
+      typeof fn(props) === "string"
+        ? fn(props).replace("must", "should") + " for best results"
+        : true
+    return out
+  },
+  {}
+)
