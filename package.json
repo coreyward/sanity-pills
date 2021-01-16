@@ -1,6 +1,6 @@
 {
   "name": "sanity-pills",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/coreyward/sanity-pills",
