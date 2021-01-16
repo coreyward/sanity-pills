@@ -1,5 +1,0 @@
-{
-  "comments": false,
-  "plugins": ["@babel/plugin-proposal-export-default-from"],
-  "presets": ["@babel/env"]
-}
