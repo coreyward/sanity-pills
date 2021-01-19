@@ -10,7 +10,7 @@
     "slugify": "^1.4.6"
   },
   "devDependencies": {
-    "esbuild": "^0.8.32",
+    "esbuild": "^0.8.33",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-import": "^2.22.1",

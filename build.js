@@ -7,7 +7,8 @@ esbuild
     bundle: true,
     minify: true,
     outdir: "dist",
-    platform: "node",
+    target: "es2017",
+    platform: "neutral",
   })
   .catch((e) => {
     console.error(e)
