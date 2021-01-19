@@ -8,7 +8,7 @@ esbuild
     minify: true,
     outdir: "dist",
     target: "es2017",
-    platform: "neutral",
+    format: "cjs",
   })
   .catch((e) => {
     console.error(e)
