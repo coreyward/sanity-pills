@@ -3,7 +3,7 @@ const esbuild = require("esbuild")
 esbuild
   .build({
     entryPoints: ["./src/index.js"],
-    external: ["slugify"],
+    external: ["lodash", "slugify"],
     bundle: true,
     minify: true,
     outdir: "dist",

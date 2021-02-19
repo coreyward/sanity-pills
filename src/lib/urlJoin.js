@@ -1,6 +1,6 @@
 const urlJoin = (...parts) => {
   let result = "" + parts.shift()
-  parts.forEach(part => {
+  parts.forEach((part) => {
     if (!part) return
 
     const trailingSlashPresent = result.charAt(result.length - 1) === "/"

@@ -1,4 +1,4 @@
-import urlJoin from "../lib/url-join.js"
+import urlJoin from "../lib/urlJoin.js"
 import slugify from "slugify"
 
 /**

@@ -1,4 +1,4 @@
-import decodeAssetId from "../lib/decode-asset-id"
+import decodeAssetId from "../lib/decodeAssetId"
 
 const imageField = {
   title: "Image",
