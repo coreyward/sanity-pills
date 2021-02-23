@@ -8,4 +8,7 @@ module.exports = {
   rules: {
     "prettier/prettier": "warn",
   },
+  env: {
+    jest: true,
+  },
 }
