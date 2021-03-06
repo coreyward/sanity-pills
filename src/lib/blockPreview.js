@@ -7,6 +7,7 @@ export default (content) => {
     (text, { _type, children }) =>
       _type === "block"
         ? text +
+          " " +
           children
             .filter((child) => child._type === "span")
             .map((span) => span.text)
