@@ -56,7 +56,10 @@ export const createSlugField = ({ prefix, ...options }) => {
 
         return obj[options.source]
       },
+
       slugify: (source) => urlJoin(prefix, createSlug(source), "/"),
+
+      ...options,
     },
     validation: (Rule) =>
       Rule.required().custom(({ current: value } = {}) => {
