@@ -102,13 +102,17 @@ const validators = {
     )
   },
 
-  // Disallow stacked marks (e.g. bold + italic)
+  // Disallow stacked standard marks (e.g. bold + italic), but allow custom marks to stack
   noStackedMarks: (blocks) => {
     const errorPaths = (blocks || [])
       .filter(
         (block) =>
           block._type === "block" &&
-          block.children.some((span) => span.marks.length > 1)
+          block.children.some(
+            (span) =>
+              span.marks.filter((mark) => standardMarks.includes(mark)).length >
+              1
+          )
       )
       .map((block) => [{ _key: block._key }])
 
@@ -121,3 +125,5 @@ const validators = {
     )
   },
 }
+
+const standardMarks = ["strong", "em", "underline", "del", "code"]
