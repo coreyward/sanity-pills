@@ -1,8 +1,6 @@
 import decodeAssetId from "../lib/decodeAssetId"
 
 const imageField = {
-  title: "Image",
-  name: "image",
   type: "image",
   options: {
     accept: "image/*",
