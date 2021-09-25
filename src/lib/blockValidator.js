@@ -10,7 +10,7 @@
  * @param {Boolean} options.noNewlines Prevent newlines inside of block content
  * @param {Boolean} options.noTerminatingWhitespace Prevent preceding or trailing whitespace
  */
-export const blockValidator = (options) => {
+export const createBlockValidator = (options) => {
   const { required, ...customValidators } = options
 
   return (Rule) =>
@@ -18,12 +18,16 @@ export const blockValidator = (options) => {
       required && Rule.required(),
       ...Object.entries(customValidators)
         .filter(([, value]) => value)
-        .map(([name]) => Rule.custom(validators[name])),
+        .map(([name, value]) =>
+          Rule.custom(
+            typeof value === "boolean" ? blockValidations[name] : value
+          )
+        ),
     ].filter(Boolean)
 }
 
-const blockValidators = {
-  all: blockValidator({
+export const defaultBlockValidator = {
+  all: createBlockValidator({
     required: true,
     noEmptyBlocks: true,
     noStackedMarks: true,
@@ -33,7 +37,7 @@ const blockValidators = {
     noTerminatingWhitespace: true,
   }),
 
-  optional: blockValidator({
+  optional: createBlockValidator({
     noEmptyBlocks: true,
     noStackedMarks: true,
     styleRequired: true,
@@ -41,17 +45,9 @@ const blockValidators = {
     noNewlines: true,
     noTerminatingWhitespace: true,
   }),
-
-  formatOnly: blockValidator({
-    styleRequired: true,
-    validateLinks: true,
-    noStackedMarks: true,
-  }),
 }
 
-export default blockValidators
-
-const validators = {
+export const blockValidations = {
   // https://www.sanity.io/docs/validation#validating-children-9e69d5db6f72
   noEmptyBlocks: (blocks) => {
     const offendingPaths = (blocks || [])
