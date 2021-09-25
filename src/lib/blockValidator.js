@@ -6,6 +6,9 @@
  * @param {Boolean} options.noEmptyBlocks Prevent zero-length blocks?
  * @param {Boolean} options.validateLinks Ensure links have required attributes?
  * @param {Boolean} options.styleRequired Ensure blocks have an associated style?
+ * @param {Boolean} options.noStackedMarks Disallow stacked standard marks (e.g. bold + italic), but allow custom marks to stack
+ * @param {Boolean} options.noNewlines Prevent newlines inside of block content
+ * @param {Boolean} options.noTerminatingWhitespace Prevent preceding or trailing whitespace
  */
 export const blockValidator = (options) => {
   const { required, ...customValidators } = options
@@ -26,6 +29,8 @@ const blockValidators = {
     noStackedMarks: true,
     styleRequired: true,
     validateLinks: true,
+    noNewlines: true,
+    noTerminatingWhitespace: true,
   }),
 
   optional: blockValidator({
@@ -33,6 +38,8 @@ const blockValidators = {
     noStackedMarks: true,
     styleRequired: true,
     validateLinks: true,
+    noNewlines: true,
+    noTerminatingWhitespace: true,
   }),
 
   formatOnly: blockValidator({
@@ -47,22 +54,60 @@ export default blockValidators
 const validators = {
   // https://www.sanity.io/docs/validation#validating-children-9e69d5db6f72
   noEmptyBlocks: (blocks) => {
-    const emptyBlocks = (blocks || []).filter(
-      (block) =>
-        block._type === "block" &&
-        block.children.every(
-          (span) => span._type === "span" && span.text.trim() === ""
-        )
-    )
-
-    const emptyPaths = emptyBlocks.map(
-      (block, index) => [{ _key: block._key }] || [index]
-    )
+    const offendingPaths = (blocks || [])
+      .filter(
+        (block) =>
+          block._type === "block" &&
+          block.children.every(
+            (span) => span._type === "span" && span.text.trim() === ""
+          )
+      )
+      .map((block, index) => [{ _key: block._key }] || [index])
 
     return (
-      emptyPaths.length === 0 || {
+      offendingPaths.length === 0 || {
         message: "Paragraph cannot be empty",
-        paths: emptyPaths,
+        paths: offendingPaths,
+      }
+    )
+  },
+
+  // Prevent newlines inside of block content
+  noNewlines: (blocks) => {
+    const offendingPaths = (blocks || [])
+      .filter(
+        (block) =>
+          block._type === "block" &&
+          block.children.every(
+            (span) => span._type === "span" && span.text.includes("\n")
+          )
+      )
+      .map((block, index) => [{ _key: block._key }] || [index])
+
+    return (
+      offendingPaths.length === 0 || {
+        message: "Text cannot contain arbitrary newlines",
+        paths: offendingPaths,
+      }
+    )
+  },
+
+  // Prevent preceding or trailing whitespace
+  noTerminatingWhitespace: (blocks) => {
+    const offendingPaths = (blocks || [])
+      .filter(
+        (block) =>
+          block._type === "block" &&
+          block.children.every(
+            (span) => span._type === "span" && span.text !== span.text.trim()
+          )
+      )
+      .map((block, index) => [{ _key: block._key }] || [index])
+
+    return (
+      offendingPaths.length === 0 || {
+        message: "Blocks cannot start or end with whitespace",
+        paths: offendingPaths,
       }
     )
   },
