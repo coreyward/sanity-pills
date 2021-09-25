@@ -1,18 +1,19 @@
 {
   "name": "sanity-pills",
+  "description": "A collection of utilities and helpers for the Sanity.io Studio.",
   "version": "1.7.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/coreyward/sanity-pills",
-  "author": "Corey Ward <corey.atx@gmail.com>",
-  "license": "MIT",
+  "author": "Corey Ward <corey@hey.com>",
+  "license": "MPL-2.0",
   "dependencies": {
     "lodash": "^4.17.21",
     "slugify": "^1.4.6"
   },
   "devDependencies": {
-    "esbuild": "^0.8.33",
-    "esbuild-jest-transform": "1.0.4",
+    "esbuild": "^0.13.0",
+    "esbuild-jest-transform": "1.1.0",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-config-standard": "^16.0.2",
