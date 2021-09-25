@@ -1,6 +1,7 @@
 export { default as imageField, createImageField } from "./fields/image"
 export { default as slugField, createSlugField } from "./fields/slug"
 export { default as blockPreview } from "./lib/blockPreview"
+export { createBlockField } from "./fields/block"
 export {
   createBlockValidator,
   defaultBlockValidator,
