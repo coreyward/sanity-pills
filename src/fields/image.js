@@ -39,7 +39,7 @@ const buildImageValidator = (validations, selectedValidators) => (image) => {
     }
 
     for (const validation in validations) {
-      if (!selectedValidators.hasOwnProperty(validation)) {
+      if (!selectedValidators[validation]) {
         throw new Error(`Unexpected validation \`${validation}\` specified.`)
       }
 
