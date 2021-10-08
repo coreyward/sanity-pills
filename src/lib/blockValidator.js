@@ -92,13 +92,13 @@ export const blockValidations = {
   // Prevent preceding or trailing whitespace
   noTerminatingWhitespace: (blocks) => {
     const offendingPaths = (blocks || [])
-      .filter(
-        (block) =>
-          block._type === "block" &&
-          block.children.every(
-            (span) => span._type === "span" && span.text !== span.text.trim()
-          )
-      )
+      .filter(({ _type, children }) => {
+        if (_type !== "block") return false
+
+        const { 0: first, length, [length - 1]: last } = children || []
+
+        return first?.text.startsWith(" ") || last?.text.endsWith(" ")
+      })
       .map((block, index) => [{ _key: block._key }] || [index])
 
     return (
