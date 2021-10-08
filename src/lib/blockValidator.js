@@ -35,6 +35,7 @@ export const defaultBlockValidator = {
     validateLinks: true,
     noNewlines: true,
     noTerminatingWhitespace: true,
+    noMarksOnHeadings: true,
   }),
 
   optional: createBlockValidator({
@@ -44,6 +45,7 @@ export const defaultBlockValidator = {
     validateLinks: true,
     noNewlines: true,
     noTerminatingWhitespace: true,
+    noMarksOnHeadings: true,
   }),
 }
 
@@ -162,6 +164,24 @@ export const blockValidations = {
       errorPaths.length === 0 || {
         message:
           "Text cannot have multiple marks applied (e.g. bold and italic)",
+        paths: errorPaths,
+      }
+    )
+  },
+
+  noMarksOnHeadings: (blocks) => {
+    const errorPaths = (blocks || [])
+      .filter(
+        (block) =>
+          block._type === "block" &&
+          block.style.startsWith("h") &&
+          block.children.some((span) => span.marks.length)
+      )
+      .map((block) => [{ _key: block._key }])
+
+    return (
+      errorPaths.length === 0 || {
+        message: "Headings cannot have marks applied (e.g. bold, links, etc.)",
         paths: errorPaths,
       }
     )
