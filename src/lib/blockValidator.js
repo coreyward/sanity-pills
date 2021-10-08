@@ -74,7 +74,8 @@ export const blockValidations = {
       .filter(
         (block) =>
           block._type === "block" &&
-          block.children.every(
+          !block.level && // don't apply to indented content list items
+          block.children.some(
             (span) => span._type === "span" && span.text.includes("\n")
           )
       )
