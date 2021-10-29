@@ -37,7 +37,7 @@ export default slug
  * @param {function} [options.slugify] - Slugging function
  * @returns {Object} Sanity field definition
  */
-export const createSlugField = ({ prefix, ...options }) => {
+export const createSlugField = ({ prefix, validation, ...options }) => {
   prefix = urlJoin("/", prefix, "/")
 
   return {
@@ -62,14 +62,17 @@ export const createSlugField = ({ prefix, ...options }) => {
       ...options,
     },
     validation: (Rule) =>
-      Rule.required().custom(({ current: value } = {}) => {
-        if (!value) return "Slug is required"
-        if (!validateFormat(value)) return "Invalid formatting"
-        if (!value.startsWith(prefix))
-          return `This document type must be under ${prefix}`
+      [
+        Rule.required().custom(({ current: value } = {}) => {
+          if (!value) return "Slug is required"
+          if (!validateFormat(value)) return "Invalid formatting"
+          if (!value.startsWith(prefix))
+            return `This document type must be under ${prefix}`
 
-        return true
-      }),
+          return true
+        }),
+        validation && validation(Rule),
+      ].filter(Boolean),
   }
 }
 
