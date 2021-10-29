@@ -1,27 +1,15 @@
-const urlJoin = (...parts) => {
-  let result = "" + parts.shift()
-  parts.forEach((part) => {
-    if (!part) return
+const urlJoin = (...parts) =>
+  parts.reduce((result, part) => {
+    if (!part) return result
 
-    const trailingSlashPresent = result.charAt(result.length - 1) === "/"
-    const preceedingSlashPresent = part.charAt(0) === "/"
+    const trailingSlashPresent = result.substr(-1) === "/"
+    const preceedingSlashPresent = part[0] === "/"
 
-    if (trailingSlashPresent) {
-      if (preceedingSlashPresent) {
-        result = result + part.substr(1)
-      } else {
-        result = result + part
-      }
-    } else {
-      if (preceedingSlashPresent) {
-        result = result + part
-      } else {
-        result = result + "/" + part
-      }
-    }
-  })
-
-  return result
-}
+    return trailingSlashPresent !== preceedingSlashPresent
+      ? result + part
+      : trailingSlashPresent && preceedingSlashPresent
+      ? result + part.substr(1)
+      : result + "/" + part
+  }, "" + parts.shift())
 
 export default urlJoin
