@@ -6,7 +6,7 @@ import slugify from "slugify"
  *
  * @param {string} input
  */
-const createSlug = (input) =>
+export const createSlug = (input) =>
   slugify(input, { lower: true, remove: /[^a-zA-Z0-9 -]/g })
 
 const slug = {

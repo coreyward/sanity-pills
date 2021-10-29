@@ -1,6 +1,10 @@
 // Fields
 export { default as imageField, createImageField } from "./fields/image"
-export { default as slugField, createSlugField } from "./fields/slug"
+export {
+  default as slugField,
+  createSlugField,
+  createSlug,
+} from "./fields/slug"
 
 // Block stuff
 export { default as blockPreview } from "./lib/blockPreview"
