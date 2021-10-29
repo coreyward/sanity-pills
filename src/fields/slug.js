@@ -44,18 +44,6 @@ export const createSlugField = ({ prefix, validation, ...options }) => {
     ...slug,
     options: {
       ...slug.options,
-      source: (document, opts) => {
-        const obj = opts.parentPath.reduce((doc, path) => {
-          if (typeof path === "object") {
-            const [[property, value]] = Object.entries(path)
-            return doc.find((d) => d[property] === value)
-          } else {
-            return doc[path]
-          }
-        }, document)
-
-        return obj[options.source]
-      },
 
       slugify: (source) => urlJoin(prefix, createSlug(source), "/"),
 
