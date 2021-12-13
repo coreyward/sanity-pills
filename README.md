@@ -10,7 +10,7 @@ Sanity Studio.
 
 Documentation on each of the utilities provided follow.
 
-#### Authoring fields with objects
+### Authoring fields with objects
 
 The `fields` helper allows authoring of field schemas in a more succinct,
 scannable manner. By way of example:
@@ -44,7 +44,7 @@ definition. This is a one-off shorthand for the most common validation scenario.
 Sanity Pills will not merge this in if you use `validation` directly, so please
 use one or the other for a given field.
 
-#### Validated image fields
+### Validated image fields
 
 There are no built-in validators for image dimensions in the Sanity Studio, but
 these are often valuable. It is straightforward enough to parse the image
@@ -84,7 +84,7 @@ are less likely to be required.
 On a related note, Sanity Pills also exposes the function used to parse a Sanity
 asset ID as `decodeAssetId`. It's documented later in this document.
 
-#### Slugs representing URL paths
+### Slugs representing URL paths
 
 If you happen to want your slugs to be valid URL paths, complete with the
 initial slash and a trailing slash, possibly with a required prefix, while
@@ -150,7 +150,7 @@ export default {
 }
 ```
 
-#### Validating block content
+### Validating block content
 
 Portable Text is a powerful way for editors to author non-trivial, rich data
 structures in a platform agnostic way, but it's easy to wind up with
@@ -230,7 +230,7 @@ const yourValidator = createBlockValidator({
 }
 ```
 
-#### Using Portable Text in a preview
+### Using Portable Text in a preview
 
 Since block content is stored as an array, you can't use it directly when
 customizing previews. Instead you have to convert it to a string, but ignore
@@ -255,7 +255,7 @@ export default {
 }
 ```
 
-#### Parsing an asset ID
+### Parsing an asset ID
 
 Sanity assigns stable, informative IDs for asset uploads, including the format
 and, for images, the dimensions of the original file. These can be easily parsed
@@ -270,7 +270,7 @@ const {
 } = decodeAssetId(someImageAssetId)
 ```
 
-#### Preventing duplicates in arrays of references
+### Preventing duplicates in arrays of references
 
 Arrays of references are pretty common, and the usual cases for them typically
 only expect a single instance of any selected document. This wee routine
@@ -294,7 +294,7 @@ const field = {
 }
 ```
 
-#### Joining path segments into a slash-delimited URL
+### Joining path segments into a slash-delimited URL
 
 Typical path joining routine that prevents doubling up slashes but won't remove
 doubled slashes in a string you pass in.
