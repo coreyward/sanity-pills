@@ -29,6 +29,11 @@ import { fields } from "sanity-pills"
     age: {
       type: "number",
     },
+
+    // a string that is only required when `age` is below 18
+    guardianName: {
+      required: ({ parent }) => parent.age < 18,
+    },
   }),
 }
 ```
@@ -38,11 +43,9 @@ provided in the value definition, a title will be inferred from the name
 (similar to default Sanity Studio behavior, less the warnings).
 
 This behaves more or less expected, converting the object into an array with the
-one notable callout being that `required: true` will result in
-`validation: Rule => Rule.required()` being included in the final field
-definition. This is a one-off shorthand for the most common validation scenario.
-Sanity Pills will not merge this in if you use `validation` directly, so please
-use one or the other for a given field.
+one notable callout being that `required` relies on the `validation` property on
+the field and specifying `validation` explicitly will override the `required`
+functionality (i.e. Sanity Pills will not merge them).
 
 ### Validated image fields
 
