@@ -29,13 +29,14 @@ export default slug
 /**
  * Generate a slug-type Sanity field with validation
  *
- * @param {Object} options
+ * @param {object} options
  * @param {string} options.source - Name of the document field to use as a source for the slug generator
  * @param {string} [options.prefix] - Require the slug to begin with a specific path
  * @param {string} [options.name] - Name of the slug field
  * @param {string} [options.title] - Title of the slug field
  * @param {function} [options.slugify] - Slugging function
- * @returns {Object} Sanity field definition
+ * @param {function} [options.validation] - Validation function
+ * @returns {object} Sanity field definition
  */
 export const createSlugField = ({ prefix, validation, ...options }) => {
   prefix = urlJoin("/", prefix, "/")
