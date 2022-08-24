@@ -313,7 +313,4 @@ urlJoin("/", "/", "/", "/", "/") // #=> "/"
 
 ## License
 
-This project is licensed under the Mozilla Public License 2.0, which is a
-copyleft license with a share-alike provision. Please contribute meaningful
-improvements back to the open-source community, either via direct contribution
-or by releasing a separate library!
+Copyright ©2022 Corey Ward. Available under the [MIT License](https://github.com/coreyward/sanity-pills/blob/master/LICENSE).
