@@ -1,5 +1,9 @@
 # Sanity Pills
 
+[![Latest version](https://img.shields.io/npm/v/sanity-pills?label=version&color=brightGreen&logo=npm)](https://www.npmjs.com/package/sanity-pills)
+![Dependency status](https://img.shields.io/librariesio/release/npm/sanity-pills)
+[![Open issues](https://img.shields.io/github/issues/coreyward/sanity-pills)](https://github.com/coreyward/sanity-pills/issues)
+
 A collection of utilities formulated to provide positive experiences in the
 Sanity Studio.
 
