@@ -25,10 +25,14 @@ export const buildImageValidator =
   }
 
 export const validators = {
-  minWidth: ({ minWidth, width }) =>
-    width >= minWidth || `Image must be at least ${minWidth}px wide`,
-  minHeight: ({ minHeight, height }) =>
-    height >= minHeight || `Image must be at least ${minHeight}px tall`,
+  minWidth: ({ minWidth, width, format }) =>
+    format === "svg" ||
+    width >= minWidth ||
+    `Image must be at least ${minWidth}px wide`,
+  minHeight: ({ minHeight, height, format }) =>
+    format === "svg" ||
+    height >= minHeight ||
+    `Image must be at least ${minHeight}px tall`,
   maxWidth: ({ maxWidth, width }) =>
     width <= maxWidth || `Image must be less than ${maxWidth}px wide`,
   maxHeight: ({ maxHeight, height }) =>

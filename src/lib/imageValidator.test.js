@@ -124,3 +124,27 @@ describe("warnings", () => {
     )
   })
 })
+
+describe("svg allowances", () => {
+  test("minWidth", () => {
+    const validator = buildImageValidator({ minWidth: 500 }, validators)
+
+    expect(validator({ asset: { _ref: "image-abc123-500x500-svg" } })).toBe(
+      true
+    )
+    expect(validator({ asset: { _ref: "image-abc123-499x500-svg" } })).toBe(
+      true
+    )
+  })
+
+  test("minHeight", () => {
+    const validator = buildImageValidator({ minHeight: 500 }, validators)
+
+    expect(validator({ asset: { _ref: "image-abc123-500x500-svg" } })).toBe(
+      true
+    )
+    expect(validator({ asset: { _ref: "image-abc123-500x499-svg" } })).toBe(
+      true
+    )
+  })
+})
