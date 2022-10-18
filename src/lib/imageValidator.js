@@ -3,11 +3,12 @@ import decodeAssetId from "./decodeAssetId"
 export const buildImageValidator =
   (validations, selectedValidators) => (image) => {
     if (image && image.asset && image.asset._ref) {
-      const { dimensions } = decodeAssetId(image.asset._ref)
+      const { dimensions, format } = decodeAssetId(image.asset._ref)
 
       const validatorProps = {
         ...validations,
         ...dimensions,
+        format,
       }
 
       for (const validation in validations) {
@@ -32,6 +33,9 @@ export const validators = {
     width <= maxWidth || `Image must be less than ${maxWidth}px wide`,
   maxHeight: ({ maxHeight, height }) =>
     height <= maxHeight || `Image must be less than ${maxHeight}px tall`,
+  allowedFormats: ({ allowedFormats, format }) =>
+    allowedFormats.includes(format) ||
+    `Image must be in ${allowedFormats.join(" or ")} format`,
 }
 
 export const warningValidators = Object.entries(validators).reduce(
