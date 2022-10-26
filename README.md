@@ -173,8 +173,8 @@ Sanity Pills ships with two built in block validators ready to use: `all` and
 enforces the presence of a value for the field.
 
 1. **No empty blocks**: an empty paragraph, for example
-2. **No newlines**: prevents single blocks (rendered as <p> tags) by default
-   from containing newlines (rendered as <br /> tags)
+2. **No newlines**: prevents single blocks (rendered as `<p>` tags) by default
+   from containing newlines (rendered as `<br />` tags)
 3. **No terminating whitespace**: disallows spaces at the beginning or end of a
    block
 4. **No missing links**: links must have a valid `href` property
