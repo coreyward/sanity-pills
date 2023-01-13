@@ -9,6 +9,7 @@
   "license": "MPL-2.0",
   "dependencies": {
     "lodash": "^4.17.21",
+    "@sanity/types": "^3.2.3",
     "slugify": "^1.4.6"
   },
   "devDependencies": {
