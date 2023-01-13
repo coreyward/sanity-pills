@@ -1,15 +1,15 @@
 {
   "name": "sanity-pills",
   "description": "A collection of utilities and helpers for the Sanity.io Studio.",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/coreyward/sanity-pills",
   "author": "Corey Ward <corey@hey.com>",
   "license": "MPL-2.0",
   "dependencies": {
-    "lodash": "^4.17.21",
     "@sanity/types": "^3.2.3",
+    "lodash": "^4.17.21",
     "slugify": "^1.4.6"
   },
   "devDependencies": {
