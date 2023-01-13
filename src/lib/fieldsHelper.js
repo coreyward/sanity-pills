@@ -1,14 +1,17 @@
+import { defineField } from "@sanity/types"
 import startCase from "lodash/startCase"
 
 // Convert object-based field definition to array-based field definition
 const fields = (fieldDefs) =>
-  Object.entries(fieldDefs).map(([name, { required, ...properties }]) => ({
-    title: startCase(name),
-    type: "string",
-    validation: required ? buildRequiredValidation(required) : null,
-    ...properties,
-    name,
-  }))
+  Object.entries(fieldDefs).map(([name, { required, ...properties }]) =>
+    defineField({
+      title: startCase(name),
+      type: "string",
+      validation: required ? buildRequiredValidation(required) : null,
+      ...properties,
+      name,
+    })
+  )
 
 export default fields
 

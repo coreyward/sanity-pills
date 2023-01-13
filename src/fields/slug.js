@@ -1,5 +1,6 @@
 import urlJoin from "../lib/urlJoin.js"
 import slugify from "slugify"
+import { defineField } from "@sanity/types"
 
 /**
  * Create a url-friendly slug with a limited character set.
@@ -24,7 +25,7 @@ const slug = {
     "The `slug` becomes the path of the published page on the website. It will be appended to the domain name automatically.",
 }
 
-export default slug
+export default defineField(slug)
 
 /**
  * Generate a slug-type Sanity field with validation
@@ -41,7 +42,7 @@ export default slug
 export const createSlugField = ({ prefix, validation, ...options }) => {
   prefix = urlJoin("/", prefix, "/")
 
-  return {
+  return defineField({
     ...slug,
     options: {
       ...slug.options,
@@ -62,7 +63,7 @@ export const createSlugField = ({ prefix, validation, ...options }) => {
         }),
         validation && validation(Rule),
       ].filter(Boolean),
-  }
+  })
 }
 
 const validateFormat = (slug) => {
