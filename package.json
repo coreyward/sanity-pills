@@ -30,6 +30,7 @@
   "scripts": {
     "prebuild": "tsc",
     "build": "node ./build.js",
+    "postbuild": "node ./injectFnComments.js",
     "prepublish": "yarn run build",
     "test": "jest"
   }
