@@ -24,6 +24,10 @@ test("internal delimiters ignored", () => {
   expect(urlJoin("/f/o/o/", "/b/a/r/")).toBe("/f/o/o/b/a/r/")
 })
 
+test("preserves existing double slashes", () => {
+  expect(urlJoin("foo//", "bar")).toBe("foo//bar")
+})
+
 test("does not insert preceding and trailing slashes", () => {
   expect(urlJoin("foo", "bar")).toBe("foo/bar")
 })
