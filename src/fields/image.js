@@ -15,6 +15,23 @@ const imageField = {
 
 export default defineField(imageField)
 
+/**
+ * Image factory params
+ * @typedef {object} CreateImageParams
+ * @property {string} [name]
+ * @property {string | import("react").ReactElement} [description]
+ * @property {import("@sanity/types").ImageOptions} [options]
+ * @property {string} [fieldset]
+ * @property {import("../lib/imageValidator").ImageValidationOptions} [validations]
+ * @property {import("../lib/imageValidator").ImageValidationOptions} [warnings]
+ */
+
+/**
+ * Creates an image field with validation
+ *
+ * @param {CreateImageParams} params
+ * @returns {import("@sanity/types").ImageDefinition}
+ */
 export const createImageField = ({
   validations: { required, ...validations } = {},
   warnings = {},

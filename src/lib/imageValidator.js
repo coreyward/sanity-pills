@@ -1,5 +1,16 @@
 import decodeAssetId from "./decodeAssetId"
 
+/**
+ * Validation options for image fields
+ * @typedef {object} ImageValidationOptions
+ * @property {number} [minWidth] Minimum width in pixels
+ * @property {number} [minHeight] Minimum height in pixels
+ * @property {number} [maxWidth] Maximum width in pixels
+ * @property {number} [maxHeight] Maximum height in pixels
+ * @property {string[]} [allowedFormats] Allowed file extensions (no separator)
+ * @property {boolean} [required] Whether the field is required
+ */
+
 export const buildImageValidator =
   (validations, selectedValidators) => (image) => {
     if (image && image.asset && image.asset._ref) {
