@@ -17,7 +17,7 @@
  *   ],
  * }
  */
-export default ({ parent }) => {
+export const noDuplicateRefs = ({ parent }) => {
   const existingRefs = parent.map((item) => item._ref).filter(Boolean)
 
   return existingRefs.length

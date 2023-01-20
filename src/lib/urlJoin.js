@@ -5,7 +5,7 @@
  * @param {...string} parts
  * @returns {string} The joined URL
  */
-const urlJoin = (...parts) =>
+export const urlJoin = (...parts) =>
   parts.reduce((result, part) => {
     if (!part) return result
 
@@ -18,5 +18,3 @@ const urlJoin = (...parts) =>
       ? result + part.substring(1)
       : result + "/" + part
   }, "" + parts.shift())
-
-export default urlJoin

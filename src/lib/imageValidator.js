@@ -1,4 +1,4 @@
-import decodeAssetId from "./decodeAssetId"
+import { decodeAssetId } from "./decodeAssetId"
 
 /**
  * Validation options for image fields

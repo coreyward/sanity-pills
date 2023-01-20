@@ -1,5 +1,5 @@
-import urlJoin from "../lib/urlJoin.js"
 import slugify from "slugify"
+import { urlJoin } from "../lib/urlJoin.js"
 import { defineField } from "@sanity/types"
 
 /**
@@ -10,7 +10,7 @@ import { defineField } from "@sanity/types"
 export const createSlug = (input) =>
   slugify(input, { lower: true, remove: /[^a-zA-Z0-9 -]/g })
 
-const slug = {
+export const slugField = defineField({
   title: "Slug",
   name: "slug",
   type: "slug",
@@ -23,9 +23,7 @@ const slug = {
   },
   description:
     "The `slug` becomes the path of the published page on the website. It will be appended to the domain name automatically.",
-}
-
-export default defineField(slug)
+})
 
 /**
  * Generate a slug-type Sanity field with validation
@@ -43,9 +41,9 @@ export const createSlugField = ({ prefix, validation, ...options }) => {
   prefix = urlJoin("/", prefix, "/")
 
   return defineField({
-    ...slug,
+    ...slugField,
     options: {
-      ...slug.options,
+      ...slugField.options,
 
       slugify: (source) => urlJoin(prefix, createSlug(source), "/"),
 

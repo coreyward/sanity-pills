@@ -1,4 +1,4 @@
-import decodeAssetId from "./decodeAssetId"
+import { decodeAssetId } from "./decodeAssetId"
 
 describe("decodeAssetId", () => {
   test("extracts parts from image asset ID", () => {
