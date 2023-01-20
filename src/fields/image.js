@@ -5,15 +5,13 @@ import {
   warningValidators,
 } from "../lib/imageValidator"
 
-const imageField = {
+export const imageField = defineField({
   type: "image",
   options: {
     accept: "image/*",
     hotspot: true,
   },
-}
-
-export default defineField(imageField)
+})
 
 /**
  * Image factory params

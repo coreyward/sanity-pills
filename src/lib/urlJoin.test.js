@@ -1,4 +1,4 @@
-import urlJoin from "./urlJoin"
+import { urlJoin } from "./urlJoin"
 
 test("avoid double delimiter", () => {
   expect(urlJoin("/foo/", "/bar/")).toBe("/foo/bar/")
