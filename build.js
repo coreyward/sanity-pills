@@ -7,8 +7,8 @@ esbuild
     bundle: true,
     minify: true,
     outdir: "dist",
-    target: "es2017",
-    format: "cjs",
+    target: "es2018",
+    format: "esm",
   })
   .catch((e) => {
     console.error(e)
