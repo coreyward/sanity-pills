@@ -87,7 +87,7 @@ function injectComments(srcFile, typeFile) {
       if (jsDocComment) {
         output = output.replace(
           matchedText,
-          [stripTypeComments(jsDocComment), matchedText].join("\n")
+          [jsDocComment, matchedText].join("\n")
         )
       }
 
