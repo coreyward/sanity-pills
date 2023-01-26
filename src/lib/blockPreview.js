@@ -1,7 +1,7 @@
 /**
  * Reduces a portable text field to a string for use in Studio previews.
  *
- * @param {object[]} content Portable Text content
+ * @param {object[]} [content] Portable Text content
  * @returns {string} Text content
  */
 export const blockPreview = (content) => {
