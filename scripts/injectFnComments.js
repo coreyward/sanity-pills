@@ -33,8 +33,8 @@
 const fs = require("fs")
 const path = require("path")
 
-const srcFolder = path.join(__dirname, "src")
-const outputFolder = path.join(__dirname, "dist")
+const srcFolder = path.join(__dirname, "../src")
+const outputFolder = path.join(__dirname, "../dist")
 
 const getFiles = (dir, done) => {
   let results = []
@@ -100,10 +100,4 @@ function injectComments(srcFile, typeFile) {
     console.log(`Updating ${typeFile}`)
     fs.writeFileSync(typeFile, output)
   }
-}
-
-function stripTypeComments(comment) {
-  return comment
-    .replaceAll(/^.*?@(param|property|typedef|returns).*$\n/gm, "")
-    .replaceAll(/^[ *]+$\n/gm, "")
 }
