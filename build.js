@@ -1,16 +1,30 @@
 const esbuild = require("esbuild")
 
+const sharedConfig = {
+  entryPoints: ["./src/index.js"],
+  external: ["lodash", "slugify"],
+  bundle: true,
+  minify: true,
+}
+
+// Build CommonJS version
 esbuild
   .build({
-    entryPoints: ["./src/index.js"],
-    external: ["lodash", "slugify"],
-    bundle: true,
-    minify: true,
-    outdir: "dist",
-    target: "es2018",
+    ...sharedConfig,
+    format: "cjs",
+    platform: "node",
+    target: ["node12"],
+    outdir: "dist/cjs",
+  })
+  .catch(() => process.exit(1))
+
+// Build ES modules version
+esbuild
+  .build({
+    ...sharedConfig,
     format: "esm",
+    target: ["es2020"],
+    splitting: true,
+    outdir: "dist/mjs",
   })
-  .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
+  .catch(() => process.exit(1))
