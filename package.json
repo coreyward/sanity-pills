@@ -2,12 +2,21 @@
   "name": "sanity-pills",
   "description": "A collection of utilities and helpers for the Sanity.io Studio.",
   "version": "2.0.0-alpha.1",
+  "author": "Corey Ward <corey@hey.com>",
+  "license": "MPL-2.0",
+  "repository": "https://github.com/coreyward/sanity-pills",
   "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/coreyward/sanity-pills",
-  "author": "Corey Ward <corey@hey.com>",
-  "license": "MPL-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/mjs/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "/dist"
+  ],
   "dependencies": {
     "@sanity/types": "^3.2.3",
     "lodash": "^4.17.21",
@@ -31,7 +40,7 @@
   "scripts": {
     "prebuild": "tsc",
     "build": "node ./build.js",
-    "postbuild": "node ./injectFnComments.js",
+    "postbuild": "node ./scripts/injectFnComments.js && ./scripts/postbuild.sh",
     "prepublish": "yarn run build",
     "test": "jest"
   }
