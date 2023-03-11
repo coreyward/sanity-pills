@@ -1,8 +1,8 @@
 import { defineField } from "@sanity/types"
 import {
   buildImageValidator,
+  getWarningValidators,
   validators,
-  warningValidators,
 } from "../lib/imageValidator"
 
 export const imageField = defineField({
@@ -44,7 +44,7 @@ export const createImageField = ({
           Rule.custom(buildImageValidator(validations, validators)),
         Object.keys(warnings).length &&
           Rule.custom(
-            buildImageValidator(warnings, warningValidators)
+            buildImageValidator(warnings, getWarningValidators())
           ).warning(),
       ].filter(Boolean),
     ...overrides,

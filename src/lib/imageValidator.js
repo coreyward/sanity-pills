@@ -53,13 +53,15 @@ export const validators = {
     `Image must be in ${allowedFormats.join(" or ")} format`,
 }
 
-export const warningValidators = Object.entries(validators).reduce(
-  (out, [name, fn]) => {
+let warningValidators
+export const getWarningValidators = () =>
+  warningValidators || (warningValidators = createWarningValidators())
+
+const createWarningValidators = () =>
+  Object.entries(validators).reduce((out, [name, fn]) => {
     out[name] = (props) =>
       typeof fn(props) === "string"
         ? fn(props).replace("must", "should") + " for best results"
         : true
     return out
-  },
-  {}
-)
+  }, {})
