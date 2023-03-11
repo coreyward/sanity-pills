@@ -1,7 +1,7 @@
 import {
   buildImageValidator,
   validators,
-  warningValidators,
+  getWarningValidators,
 } from "./imageValidator"
 
 test("minWidth", () => {
@@ -63,6 +63,8 @@ test("allowedFormats single", () => {
 })
 
 describe("warnings", () => {
+  const warningValidators = getWarningValidators()
+
   test("minWidth", () => {
     const validator = buildImageValidator({ minWidth: 500 }, warningValidators)
 
