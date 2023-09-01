@@ -1,5 +1,5 @@
 import { defineField } from "@sanity/types"
-import startCase from "lodash/startCase"
+import { startCase } from "./startCase"
 
 /**
  * Convert object-based field definition to array-based field definition

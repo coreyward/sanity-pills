@@ -2,7 +2,7 @@ const esbuild = require("esbuild")
 
 const sharedConfig = {
   entryPoints: ["./src/index.js"],
-  external: ["lodash", "slugify"],
+  external: ["slugify"],
   bundle: true,
   minify: true,
 }

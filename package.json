@@ -20,7 +20,6 @@
   "sideEffects": false,
   "dependencies": {
     "@sanity/types": "^3.8.2",
-    "lodash": "^4.17.21",
     "slugify": "^1.4.6"
   },
   "devDependencies": {
