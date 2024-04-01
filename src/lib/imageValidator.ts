@@ -1,18 +1,27 @@
+import { CustomValidator, ImageAsset, ImageValue } from "@sanity/types"
 import { decodeAssetId } from "./decodeAssetId"
 
-/**
- * Validation options for image fields
- * @typedef {object} ImageValidationOptions
- * @property {number} [minWidth] Minimum width in pixels
- * @property {number} [minHeight] Minimum height in pixels
- * @property {number} [maxWidth] Maximum width in pixels
- * @property {number} [maxHeight] Maximum height in pixels
- * @property {string[]} [allowedFormats] Allowed file extensions (no separator)
- * @property {boolean} [required] Whether the field is required
- */
+export type ImageValidationOptions = {
+  minWidth?: number
+  minHeight?: number
+  maxWidth?: number
+  maxHeight?: number
+  /**
+   * Allowed file extensions (no separator)
+   */
+  allowedFormats?: string[]
+  required?: boolean
+}
 
 export const buildImageValidator =
-  (validations, selectedValidators) => (image) => {
+  (
+    validations: ImageValidationOptions,
+    selectedValidators: Record<
+      keyof typeof validators,
+      (typeof validators)[keyof typeof validators]
+    >
+  ): CustomValidator<ImageValue | undefined> =>
+  (image) => {
     if (image && image.asset && image.asset._ref) {
       const { dimensions, format } = decodeAssetId(image.asset._ref)
 
@@ -36,22 +45,44 @@ export const buildImageValidator =
   }
 
 export const validators = {
-  minWidth: ({ minWidth, width, format }) =>
+  minWidth: ({
+    minWidth,
+    width,
+    format,
+  }: {
+    minWidth: number
+    width: number
+    format: string
+  }) =>
     format === "svg" ||
     width >= minWidth ||
     `Image must be at least ${minWidth}px wide`,
-  minHeight: ({ minHeight, height, format }) =>
+  minHeight: ({
+    minHeight,
+    height,
+    format,
+  }: {
+    minHeight: number
+    height: number
+    format: string
+  }) =>
     format === "svg" ||
     height >= minHeight ||
     `Image must be at least ${minHeight}px tall`,
-  maxWidth: ({ maxWidth, width }) =>
+  maxWidth: ({ maxWidth, width }: { maxWidth: number; width: number }) =>
     width <= maxWidth || `Image must be less than ${maxWidth}px wide`,
-  maxHeight: ({ maxHeight, height }) =>
+  maxHeight: ({ maxHeight, height }: { maxHeight: number; height: number }) =>
     height <= maxHeight || `Image must be less than ${maxHeight}px tall`,
-  allowedFormats: ({ allowedFormats, format }) =>
+  allowedFormats: ({
+    allowedFormats,
+    format,
+  }: {
+    allowedFormats: string[]
+    format: string
+  }) =>
     allowedFormats.includes(format) ||
     `Image must be in ${allowedFormats.join(" or ")} format`,
-}
+} as const
 
 let warningValidators
 export const getWarningValidators = () =>
@@ -59,9 +90,11 @@ export const getWarningValidators = () =>
 
 const createWarningValidators = () =>
   Object.entries(validators).reduce((out, [name, fn]) => {
-    out[name] = (props) =>
-      typeof fn(props) === "string"
-        ? fn(props).replace("must", "should") + " for best results"
+    out[name] = (props) => {
+      const result = fn(props)
+      return typeof result === "string"
+        ? result.replace("must", "should") + " for best results"
         : true
+    }
     return out
   }, {})

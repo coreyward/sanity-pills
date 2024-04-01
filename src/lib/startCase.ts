@@ -4,7 +4,7 @@
  * @param {string} input
  * @returns {string}
  */
-export const startCase = (input) => {
+export const startCase = (input: string) => {
   const parts = isCamelCase(input)
     ? splitCamelCase(input)
     : splitDelimited(input)
@@ -16,25 +16,20 @@ export const startCase = (input) => {
 
 /**
  * Evaluate whether input is camelCase.
- *
- * @param {string} input
- * @returns {boolean}
  */
-export const isCamelCase = (input) =>
+export const isCamelCase = (input: string) =>
   /^[A-Za-z][\da-z]*[A-Z][\dA-Za-z]+$/.test(input)
 
 /**
  * Split camelCase on capital letters following lowercase
- * @param {string} input
  */
-export const splitCamelCase = (input) =>
+export const splitCamelCase = (input: string) =>
   input.match(/(^[A-Za-z][\da-z]+|(?<=[a-z])([A-Z]+[\da-z]*))/g)
 
 /**
  * Split on hyphens, underscores, and spaces
- * @param {string} input
  */
-export const splitDelimited = (input) =>
+export const splitDelimited = (input: string) =>
   input
     .replace(/[-_\s]+/g, " ")
     .trim()
