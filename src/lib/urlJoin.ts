@@ -1,11 +1,8 @@
 /**
  * Concatenates a list of URL parts, ensuring that there is only one slash
  * between each part.
- *
- * @param {...string} parts
- * @returns {string} The joined URL
  */
-export const urlJoin = (...parts) =>
+export const urlJoin = (...parts: string[]): string =>
   parts.reduce((result, part) => {
     if (!part) return result
 

@@ -1,3 +1,5 @@
+import type { Rule } from "@sanity/types"
+
 /**
  * Regular expression pattern matching email addresses designed to catch input
  * errors and mistakes more than to prevent all invalid emails.
@@ -18,16 +20,13 @@ export const errors = {
     "Relative links should start with a forward slash (/) or fragment (#).",
   invalidSpaces: "Links cannot contain unencoded spaces.",
   invalidFragment: "The fragment portion of this link looks invalid.",
-}
+} as const
 
 /**
  * Validates a provided string value as a URL. Expected to be used in
  * conjunction with the built in `uri` validator in the Sanity Studio.
- *
- * @param {string} value The url-like value to validate
- * @returns {boolean | string} Either an error message or `true` if the value is valid
  */
-export const validateUrlValue = (value) => {
+export const validateUrlValue = (value: string) => {
   if (value?.startsWith("mailto:")) {
     const [, emailPart] = value.split(":")
     if (!emailPattern.test(emailPart)) {
@@ -70,12 +69,10 @@ export const validateUrlValue = (value) => {
 
 /**
  * Validates a required URL field value
- *
- * @param {import("@sanity/types").Rule} Rule
- * @returns {boolean | string}
  */
-export const requiredUrlValidator = (Rule) =>
-  Rule.required()
+export const requiredUrlValidator = (rule: Rule) =>
+  rule
+    .required()
     .uri({
       allowRelative: true,
       scheme: ["https", "http", "mailto"],
@@ -84,12 +81,11 @@ export const requiredUrlValidator = (Rule) =>
 
 /**
  * Validates a URL field value without requiring it to be present.
- *
- * @param {import("@sanity/types").Rule} Rule
- * @returns {boolean | string}
  */
-export const optionalUrlValidator = (Rule) =>
-  Rule.uri({
-    allowRelative: true,
-    scheme: ["https", "http", "mailto"],
-  }).custom(validateUrlValue)
+export const optionalUrlValidator = (rule: Rule) =>
+  rule
+    .uri({
+      allowRelative: true,
+      scheme: ["https", "http", "mailto"],
+    })
+    .custom(validateUrlValue)
