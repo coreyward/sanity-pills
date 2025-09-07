@@ -3,14 +3,13 @@ import {
   SanityDocument,
   SchemaValidationValue,
   defineField,
+  FieldDefinition,
 } from "@sanity/types"
 import { startCase } from "./startCase"
 
-export type DefineFieldInput = Parameters<typeof defineField>[0]
 export type DefineFieldOutput = ReturnType<typeof defineField>
 
-export type FieldDef = Omit<DefineFieldInput, "name" | "type"> & {
-  type?: DefineFieldInput["type"]
+export type FieldDef = Partial<FieldDefinition> & {
   required?: boolean
 }
 
