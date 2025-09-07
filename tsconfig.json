@@ -8,6 +8,7 @@
     "outDir": "./dist",
     "removeComments": false,
     "target": "ES2020",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "skipLibCheck": true
   }
 }
