@@ -4,7 +4,9 @@
  */
 export const urlJoin = (...parts: string[]): string =>
   parts.reduce((result, part) => {
-    if (!part) return result
+    if (!part) {
+      return result
+    }
 
     const trailingSlashPresent = result.endsWith("/")
     const preceedingSlashPresent = part.startsWith("/")
@@ -12,6 +14,6 @@ export const urlJoin = (...parts: string[]): string =>
     return trailingSlashPresent !== preceedingSlashPresent
       ? result + part
       : trailingSlashPresent && preceedingSlashPresent
-      ? result + part.substring(1)
-      : result + "/" + part
-  }, "" + parts.shift())
+        ? result + part.substring(1)
+        : result + "/" + part
+  }, parts.shift() ?? "")
