@@ -25,40 +25,43 @@
     "@sanity/types": "^3.30.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.29.0",
     "@sanity/types": "^3.36.2",
     "@size-limit/preset-small-lib": "^8.2.4",
-    "esbuild": "^0.17.11",
-    "esbuild-jest-transform": "^1.1.0",
-    "eslint": "^8.22.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-i": "^2.28.0",
-    "eslint-plugin-n": "^15.2.5",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.0.0",
-    "jest": "^29.5.0",
-    "prettier": "^2.7.1",
+    "eslint": "^9.29.0",
+    "eslint-import-resolver-typescript": "^4.4.3",
+    "eslint-plugin-import-x": "^4.15.2",
+    "jiti": "^2.5.1",
+    "prettier": "^3.5.3",
     "size-limit": "^8.2.4",
-    "typescript": "^5.4.3"
+    "tsup": "^8.0.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.42.0",
+    "vitest": "^3.2.4"
   },
   "scripts": {
-    "prebuild": "tsc",
-    "build": "node ./build.js",
-    "postbuild": "node ./scripts/injectFnComments.js && ./scripts/postbuild.sh",
-    "prepublish": "pnpm run build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "tsc --noEmit",
+    "build": "tsup",
+    "prepublishOnly": "pnpm build",
     "size": "size-limit",
-    "test": "jest"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "size-limit": [
     {
-      "path": "dist/mjs/index.js",
+      "path": "dist/index.mjs",
       "limit": "10 KB"
     },
     {
-      "path": "dist/cjs/index.js",
+      "path": "dist/index.js",
       "limit": "15 KB"
     }
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "packageManager": "pnpm@10.10.0"
 }
