@@ -1,9 +1,10 @@
+import { describe, it, expect } from "vitest"
 import {
   startCase,
   isCamelCase,
   splitCamelCase,
   splitDelimited,
-} from "./startCase" // Replace 'yourFile' with the actual file name
+} from "./startCase"
 
 describe("startCase", () => {
   it("converts camelCase to Start Case", () => {
