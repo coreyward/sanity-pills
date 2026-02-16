@@ -15,14 +15,32 @@ type AssetProperties = {
  * Decode a Sanity asset ID into its parts.
  */
 export const decodeAssetId = (id: string): AssetProperties => {
-  const [, assetId, dimensions, format] = pattern.exec(id)
-  const [width, height] = dimensions
-    ? dimensions.split("x").map((v) => parseInt(v, 10))
-    : []
+  const match = pattern.exec(id)
+  if (!match) {
+    throw new Error(`Invalid asset ID: ${id}`)
+  }
+  const [, assetId, dimensions, format] = match
+
+  if (!assetId || !format) {
+    throw new Error(`Invalid asset ID: ${id}`)
+  }
+
+  if (dimensions) {
+    const parsedDimensions = dimensions.split("x").map((v) => parseInt(v, 10))
+    if (parsedDimensions.length === 2) {
+      return {
+        assetId,
+        dimensions: {
+          width: parsedDimensions[0]!,
+          height: parsedDimensions[1]!,
+        },
+        format,
+      }
+    }
+  }
 
   return {
     assetId,
-    dimensions: { width, height },
     format,
   }
 }

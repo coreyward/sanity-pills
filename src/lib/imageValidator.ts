@@ -1,4 +1,7 @@
-import { CustomValidator, ImageAsset, ImageValue } from "@sanity/types"
+import type {
+  CustomValidator,
+  ImageValue,
+} from "@sanity/types"
 import { decodeAssetId } from "./decodeAssetId"
 
 export type ImageValidationOptions = {
@@ -22,7 +25,7 @@ export const buildImageValidator =
     >
   ): CustomValidator<ImageValue | undefined> =>
   (image) => {
-    if (image && image.asset && image.asset._ref) {
+    if (image?.asset?._ref) {
       const { dimensions, format } = decodeAssetId(image.asset._ref)
 
       const validatorProps = {
@@ -32,12 +35,15 @@ export const buildImageValidator =
       }
 
       for (const validation in validations) {
-        if (!selectedValidators[validation]) {
+        const validationKey = validation as keyof typeof validators
+        if (!(validationKey in selectedValidators)) {
           throw new Error(`Unexpected validation \`${validation}\` specified.`)
         }
 
-        const result = selectedValidators[validation](validatorProps)
-        if (typeof result === "string") return result
+        const result = selectedValidators[validationKey](validatorProps as never)
+        if (typeof result === "string") {
+          return result
+        }
       }
     }
 
@@ -84,17 +90,22 @@ export const validators = {
     `Image must be in ${allowedFormats.join(" or ")} format`,
 } as const
 
-let warningValidators
+let warningValidators: typeof validators | undefined
 export const getWarningValidators = () =>
-  warningValidators || (warningValidators = createWarningValidators())
+  warningValidators ?? (warningValidators = createWarningValidators())
 
-const createWarningValidators = () =>
-  Object.entries(validators).reduce((out, [name, fn]) => {
-    out[name] = (props) => {
-      const result = fn(props)
-      return typeof result === "string"
-        ? result.replace("must", "should") + " for best results"
+const createWarningValidators = (): typeof validators => {
+  const result = {} as Record<string, unknown>
+  
+  for (const [name, fn] of Object.entries(validators)) {
+    const key = name as keyof typeof validators
+    result[key] = (props: Parameters<typeof fn>[0]) => {
+      const validationResult = fn(props as never)
+      return typeof validationResult === "string"
+        ? validationResult.replace("must", "should") + " for best results"
         : true
     }
-    return out
-  }, {})
+  }
+  
+  return result as typeof validators
+}

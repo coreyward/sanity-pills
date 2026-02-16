@@ -1,9 +1,9 @@
 import {
-  Rule,
-  SanityDocument,
-  SchemaValidationValue,
+  type Rule,
+  type SanityDocument,
+  type SchemaValidationValue,
   defineField,
-  FieldDefinition,
+  type FieldDefinition,
 } from "@sanity/types"
 import { startCase } from "./startCase"
 
@@ -34,7 +34,7 @@ export const fields = (
 type ConditionalRequiredFn = (params: {
   value: unknown
   parent: unknown
-  document?: SanityDocument
+  document?: SanityDocument | undefined
 }) => SchemaValidationValue
 
 const buildRequiredValidation = (input: boolean | ConditionalRequiredFn) =>

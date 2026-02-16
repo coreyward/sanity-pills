@@ -1,11 +1,11 @@
-import { ImageOptions, ImageValue, Rule } from "@sanity/types"
+import type { ImageOptions, ImageValue, Rule } from "@sanity/types"
 import {
-  ImageValidationOptions,
+  type ImageValidationOptions,
   buildImageValidator,
   getWarningValidators,
   validators,
 } from "../lib/imageValidator"
-import { FieldDef } from "../lib/fieldsHelper"
+import type { FieldDef } from "../lib/fieldsHelper"
 
 export const imageField: FieldDef = {
   type: "image",
@@ -36,11 +36,11 @@ export const createImageField = ({
   validation: (rule: Rule) =>
     [
       required && rule.required(),
-      Object.keys(validations).length &&
+      Object.keys(validations).length > 0 &&
         rule.custom<ImageValue | undefined>(
           buildImageValidator(validations, validators)
         ),
-      Object.keys(warnings).length &&
+      Object.keys(warnings).length > 0 &&
         rule
           .custom(buildImageValidator(warnings, getWarningValidators()))
           .warning(),

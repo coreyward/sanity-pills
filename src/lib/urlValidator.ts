@@ -26,10 +26,10 @@ export const errors = {
  * Validates a provided string value as a URL. Expected to be used in
  * conjunction with the built in `uri` validator in the Sanity Studio.
  */
-export const validateUrlValue = (value: string) => {
+export const validateUrlValue = (value?: string) => {
   if (value?.startsWith("mailto:")) {
     const [, emailPart] = value.split(":")
-    if (!emailPattern.test(emailPart)) {
+    if (!emailPart || !emailPattern.test(emailPart)) {
       return errors.invalidEmail
     } else {
       return true
