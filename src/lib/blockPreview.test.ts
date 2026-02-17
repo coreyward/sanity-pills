@@ -3,9 +3,9 @@ import type { PortableTextBlock } from "@sanity/types"
 import { blockPreview } from "./blockPreview"
 
 describe("blockPreview", () => {
-  it("returns null for undefined or empty content", () => {
-    expect(blockPreview(undefined)).toBeNull()
-    expect(blockPreview([])).toBeNull()
+  it("returns empty string for undefined or empty content", () => {
+    expect(blockPreview(undefined)).toBe("")
+    expect(blockPreview([])).toBe("")
   })
 
   it("reduces a single block to its span text only", () => {

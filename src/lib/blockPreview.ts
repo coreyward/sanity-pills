@@ -8,9 +8,9 @@ import type { PortableTextBlock, PortableTextSpan } from "@sanity/types"
  */
 export const blockPreview = (
   content: PortableTextBlock[] | undefined
-): string | null => {
+): string => {
   if (!Array.isArray(content) || content.length === 0) {
-    return null
+    return ""
   }
 
   return content
