@@ -1,4 +1,4 @@
-import type { ImageOptions, ImageValue, Rule } from "@sanity/types"
+import type { ImageDefinition, ImageValue, Rule } from "@sanity/types"
 import {
   type ImageValidationOptions,
   buildImageValidator,
@@ -15,11 +15,10 @@ export const imageField: FieldDef = {
   },
 }
 
-type CreateImageParams = {
-  name?: string
-  description?: string | React.ReactElement
-  options?: ImageOptions
-  fieldset?: string
+type CreateImageParams = Omit<
+  Partial<ImageDefinition>,
+  "type" | "validation"
+> & {
   validations?: ImageValidationOptions
   warnings?: ImageValidationOptions
 }

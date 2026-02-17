@@ -16,8 +16,8 @@ importers:
         specifier: ^9.29.0
         version: 9.35.0
       '@sanity/types':
-        specifier: ^3.36.2
-        version: 3.99.0(@types/react@19.1.12)
+        specifier: ^5.10.0
+        version: 5.10.0(@types/react@19.1.12)
       '@size-limit/preset-small-lib':
         specifier: ^8.2.4
         version: 8.2.6(size-limit@8.2.6)
@@ -557,20 +557,20 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@sanity/client@7.11.0':
-    resolution: {integrity: sha512-dZU//1Kk+0Je4TIpMtTY58ly1tNzyx1GQsbU8SD+s7FjxMM1MRCQoq7/vU8YwGNK3P0/DKHGNOmA3LsK5XJkSA==}
+  '@sanity/client@7.15.0':
+    resolution: {integrity: sha512-3RlK9c1lhNT4c4PhQp9/z6Zghb7n/HCmB5U1AgX8eFQBnx7vDUPwBge3mOakCh279cUA4e+8uys+rN9oQsrjXA==}
     engines: {node: '>=20'}
 
   '@sanity/eventsource@5.0.2':
     resolution: {integrity: sha512-/B9PMkUvAlUrpRq0y+NzXgRv5lYCLxZNsBJD2WXVnqZYOfByL9oQBV7KiTaARuObp5hcQYuPfOAVjgXe3hrixA==}
 
-  '@sanity/media-library-types@1.0.0':
-    resolution: {integrity: sha512-RwBou7SybMbHkSeCn+3L/hbaFP77at3BesP67o8D8RrFiOgHX/h4ibw4yEauC1s09U9BE1MPq9K7ji+0XU57GA==}
+  '@sanity/media-library-types@1.2.0':
+    resolution: {integrity: sha512-p+Bw96I63SwBcMNA/L5dnMdEcS88EEDUDZ65LGuwOCMXrESRGMFCSxgc+0HnL0JXDIzgYgfrPuf1I3bO9QneAw==}
 
-  '@sanity/types@3.99.0':
-    resolution: {integrity: sha512-a766U9VSoyOSWq+RZz9wsEo/Nnn+inDkEcdGu+rHFuygdepullB/RZpF2MxNsfUMCSPnajgG1Tm9lhwbSmlySA==}
+  '@sanity/types@5.10.0':
+    resolution: {integrity: sha512-oxtssb6sHJfxcIcMogNt2EuHrnd9JZQpjz9pZJdA7+sc1ioJSTfBDdCO2Eh00kOBI8Z7bAVASCkTqWBC1MWo2w==}
     peerDependencies:
-      '@types/react': 18 || 19
+      '@types/react': ^19.2
 
   '@size-limit/esbuild@8.2.6':
     resolution: {integrity: sha512-a4c8xVDuDMYw5jF655ADjQDluw3jGPPYer6UJock5rSnUlWnIbmT/Ohud7gJGq5gqyLUQOCrBD7NB3g+mlhj4g==}
@@ -1305,8 +1305,8 @@ packages:
     resolution: {integrity: sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==}
     engines: {node: '>= 0.4'}
 
-  get-it@8.6.10:
-    resolution: {integrity: sha512-27StIK860ZVp2bhsG/aTWpcoA4OrFxtMqBbesa5sR23m5OxfVQYCnpm2rPQeo3gs5qsUk0FdkISLgXRJ4HynNw==}
+  get-it@8.7.0:
+    resolution: {integrity: sha512-uong/+jOz0GiuIWIUJXp2tnQKgQKukC99LEqOxLckPUoHYoerQbV6vC0Tu+/pSgk0tgHh1xX2aJtCk4y35LLLg==}
     engines: {node: '>=14.0.0'}
 
   get-proto@1.0.1:
@@ -2601,10 +2601,10 @@ snapshots:
   '@rtsao/scc@1.1.0':
     optional: true
 
-  '@sanity/client@7.11.0':
+  '@sanity/client@7.15.0':
     dependencies:
       '@sanity/eventsource': 5.0.2
-      get-it: 8.6.10
+      get-it: 8.7.0
       nanoid: 3.3.11
       rxjs: 7.8.2
     transitivePeerDependencies:
@@ -2617,12 +2617,12 @@ snapshots:
       event-source-polyfill: 1.0.31
       eventsource: 2.0.2
 
-  '@sanity/media-library-types@1.0.0': {}
+  '@sanity/media-library-types@1.2.0': {}
 
-  '@sanity/types@3.99.0(@types/react@19.1.12)':
+  '@sanity/types@5.10.0(@types/react@19.1.12)':
     dependencies:
-      '@sanity/client': 7.11.0
-      '@sanity/media-library-types': 1.0.0
+      '@sanity/client': 7.15.0
+      '@sanity/media-library-types': 1.2.0
       '@types/react': 19.1.12
     transitivePeerDependencies:
       - debug
@@ -3560,7 +3560,7 @@ snapshots:
       math-intrinsics: 1.1.0
     optional: true
 
-  get-it@8.6.10:
+  get-it@8.7.0:
     dependencies:
       '@types/follow-redirects': 1.14.4
       decompress-response: 7.0.0

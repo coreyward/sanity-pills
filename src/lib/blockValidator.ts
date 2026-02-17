@@ -1,10 +1,9 @@
 import type {
-  BlockRule,
   CustomValidatorResult,
   PortableTextBlock,
   PortableTextSpan,
   PortableTextTextBlock,
-  ValidationBuilder,
+  Rule,
 } from "@sanity/types"
 
 type BlockValidatorOptions = {
@@ -59,10 +58,10 @@ const isSpan = (
  */
 export const createBlockValidator = (
   options: BlockValidatorOptions
-): ValidationBuilder<BlockRule, PortableTextBlock[]> => {
+) => {
   const { required, ...customValidators } = options
 
-  return (rule) => {
+  return (rule: Rule) => {
     const rules = Object.entries(customValidators)
       .filter(([, value]) => value)
       .map(([name]) =>

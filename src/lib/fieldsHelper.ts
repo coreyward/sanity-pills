@@ -2,12 +2,10 @@ import {
   type Rule,
   type SanityDocument,
   type SchemaValidationValue,
-  defineField,
   type FieldDefinition,
+  defineField,
 } from "@sanity/types"
 import { startCase } from "./startCase"
-
-export type DefineFieldOutput = ReturnType<typeof defineField>
 
 export type FieldDef = Partial<FieldDefinition> & {
   required?: boolean
@@ -18,7 +16,7 @@ export type FieldDef = Partial<FieldDefinition> & {
  */
 export const fields = (
   fieldDefs: Record<string, FieldDef>
-): DefineFieldOutput[] => {
+): FieldDefinition[] => {
   const entries: [string, FieldDef][] = Object.entries(fieldDefs)
   return entries.map(([name, { required, ...rest }]) =>
     defineField({

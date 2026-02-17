@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { describe, expect, test, vi } from "vitest"
 import type {
-  BlockRule,
   PortableTextBlock,
   PortableTextTextBlock,
+  Rule,
 } from "@sanity/types"
 import { blockValidations, createBlockValidator } from "./blockValidator"
 
@@ -36,7 +37,7 @@ const mockRule = () => {
   const rule = {
     required: vi.fn(() => rule),
     custom: vi.fn(() => rule),
-  } as unknown as BlockRule
+  } as unknown as Rule
   return rule
 }
 
