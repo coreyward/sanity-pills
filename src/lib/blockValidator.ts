@@ -3,7 +3,6 @@ import type {
   PortableTextBlock,
   PortableTextSpan,
   PortableTextTextBlock,
-  Rule,
 } from "@sanity/types"
 
 type BlockValidatorOptions = {
@@ -56,12 +55,17 @@ const isSpan = (
 /**
  * Validator-generator for Portable Text fields
  */
-export const createBlockValidator = (
-  options: BlockValidatorOptions
-) => {
+export const createBlockValidator = (options: BlockValidatorOptions) => {
   const { required, ...customValidators } = options
 
-  return (rule: Rule) => {
+  return <
+    RuleT extends {
+      required: () => RuleT
+      custom: (fn: BlockValidator) => RuleT
+    },
+  >(
+    rule: RuleT
+  ) => {
     const rules = Object.entries(customValidators)
       .filter(([, value]) => value)
       .map(([name]) =>

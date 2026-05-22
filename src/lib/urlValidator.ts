@@ -1,4 +1,4 @@
-import type { Rule } from "@sanity/types"
+import type { CustomValidator, UriValidationOptions } from "@sanity/types"
 
 /**
  * Regular expression pattern matching email addresses designed to catch input
@@ -67,10 +67,18 @@ export const validateUrlValue = (value?: string) => {
   return true
 }
 
+type UrlRulelike<Self> = {
+  required: () => Self
+  uri: (options: UriValidationOptions) => Self
+  custom: (fn: CustomValidator<string | undefined>) => Self
+}
+
 /**
  * Validates a required URL field value
  */
-export const requiredUrlValidator = (rule: Rule) =>
+export const requiredUrlValidator = <RuleT extends UrlRulelike<RuleT>>(
+  rule: RuleT,
+): RuleT =>
   rule
     .required()
     .uri({
@@ -82,7 +90,9 @@ export const requiredUrlValidator = (rule: Rule) =>
 /**
  * Validates a URL field value without requiring it to be present.
  */
-export const optionalUrlValidator = (rule: Rule) =>
+export const optionalUrlValidator = <RuleT extends UrlRulelike<RuleT>>(
+  rule: RuleT,
+): RuleT =>
   rule
     .uri({
       allowRelative: true,
